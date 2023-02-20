@@ -17,7 +17,7 @@ DEBUG = True
 if settings.DEBUG:
     ALLOWED_HOSTS = ['*','192.168.17','localhost']
 else:
-    ALLOWED_HOSTS = ['43.206.107.4']
+    ALLOWED_HOSTS = ['43.206.107.4','ec2-43-206-107-4.ap-northeast-1.compute.amazonaws.com']
 
 
 # Application definition
