@@ -12,3 +12,6 @@ def doctorlogin(request):
 
 def profile(request):
     return render(request, 'webhome/profile.html')
+     
+def register(request):
+    return render(request, 'webhome/register.html')     

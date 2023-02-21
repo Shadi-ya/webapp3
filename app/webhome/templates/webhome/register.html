@@ -1,15 +1,16 @@
 {% load static %}
-
 <html>
 
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Register</title>
     <meta name="description" content="Login - Register Template">
     <meta name="author" content="Lorenzo Angelino aka MrLolok">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href={% static 'webhome/css/main.css' %}>
+    <link rel="stylesheet" href={% static  "css/main.css" %} />
+
     <style>
         body {
             background-color: #303641;
@@ -18,12 +19,21 @@
 </head>
 
 <body>
-    <div id="container-login">
+    <div id="container-register">
         <div id="title">
-            <i class="material-icons lock">lock</i> Login
+            <i class="material-icons lock">lock</i> Register
         </div>
 
         <form>
+            <div class="input">
+                {% comment %} <div class="input-addon">
+                    <i class="material-icons">email</i>
+                </div> {% endcomment %}
+                <input id="email" placeholder="Email" type="email" required class="validate" autocomplete="off">
+            </div>
+
+            <div class="clearfix"></div>
+
             <div class="input">
                 {% comment %} <div class="input-addon">
                     <i class="material-icons">face</i>
@@ -42,23 +52,20 @@
 
             <div class="remember-me">
                 <input type="checkbox">
-                <span style="color: #DDD">Remember Me</span>
+                <span style="color: #DDD">I accept Terms of Service</span>
             </div>
 
-            <input type="submit" value="Log In" />
+            <input type="submit" value="Register" />
         </form>
 
-        <div class="forgot-password">
-            <a href="#">Forgot your password?</a>
-        </div>
-        <div class="privacy">
+        {% comment %} <div class="privacy">
             <a href="#">Privacy Policy</a>
-        </div>
+        </div> {% endcomment %}
 
-        <div class="register">
-            Don't have an account yet?
-            <a href="/register"><button id="register-link">Register here</button></a>
-        </div>
+        {% comment %} <div class="register">
+            Do you already have an account?
+            <a href="#"><button id="register-link">Log In here</button></a>
+        </div> {% endcomment %}
     </div>
 </body>
 
