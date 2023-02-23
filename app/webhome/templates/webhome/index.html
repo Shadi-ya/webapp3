@@ -1,9 +1,40 @@
-{% extends "webhome/navbar.html" %}
+{% extends "webhome/navbar.html" %} 
 {% block title %}
-Home
-{% endblock %}
+        Home
+{% endblock %} 
+{% block content %}
+{% load static %}
+ <html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> medcare </title>
+    <link rel="stylesheet" href={% static 'webhome/css/style.css' %}>
+</head>
 
+<body>
+    <div class="main"></div>
+    {% comment %} <h1>MedCare</h1>  {% endcomment %}
+    <div class="clip"></div>
+    <img src="{% static 'webhome\css\images\chatbot-2.png' %}" alt="bot" class="bot">
+    <div class="chatBot">
 
+        <div class="chatBot-container">
+            <div class="response">zax is typing ...</div>
+            <form autocomplete="off">
+                <label for="message">Ask me something</label>
+                <input type="text" name="message" required placeholder="How can I help you?">
+                <button type="submit">Enter</button>
+            </form>
+            {% comment %} <img class="close" src="./imgs/close.svg" alt="close">  {% endcomment %}
+         </div>
 
+    </div> 
+
+    <script src= {% static 'webhome/css/main.js' %}> </script>
+</body>
+
+</html>
+{% endblock %}  
 
