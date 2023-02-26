@@ -1,0 +1,36 @@
+version: '3.8' 
+services: 
+  webapp_web: 
+    build:
+      context: ./app
+      dockerfile: Dockerfile.dev  
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes: 
+      - ./app/:/webapp/app/   
+    ports: 
+      - 8000:8000
+    depends_on:
+      - webapp_development_db
+    environment:  
+      - DEBUG=1
+      - SECRET_KEY=setsecretkey
+      - ALLOWED_HOSTS=localhost
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=webapp_development_db
+      - SQL_USER=webapp_development_user
+      - SQL_PASSWORD=webapp_development_password
+      - SQL_HOST=webapp_development_db
+      - SQL_PORT=5432
+    restart: always 
+  webapp_development_db:
+    image: postgres:13.0-alpine
+    volumes:
+      - webapp_development_postgres_data:/var/lib/postgresql/data/  
+    environment:  
+      - POSTGRES_USER=webapp_development_user 
+      - POSTGRES_PASSWORD=webapp_development_password
+      - POSTGRES_DB=webapp_development_db   
+
+volumes:
+  webapp_development_postgres_data:
+

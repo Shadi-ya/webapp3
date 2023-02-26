@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  webapp_nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - webapp_web
+    ports:
+      - 80:80
+    volumes:
+      - ./app/staticfiles/:/webapp/app/staticfiles
+      - ./app/mediafiles:/webapp/app/mediafiles
+
+
+  webapp_web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.prod
+    command: gunicorn webapp.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./app/staticfiles/:/webapp/app/staticfiles
+      - ./app/mediafiles:/webapp/app/mediafiles
+    expose:
+      - 8000 
+    depends_on:
+      - webapp_local_production_db 
+    restart: always 
+    environment:  
+      - DEBUG=1
+      - SECRET_KEY=setsecretkey
+      - ALLOWED_HOSTS=localhost
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=webapp_local_production_db
+      - SQL_USER=webapp_local_production_user
+      - SQL_PASSWORD=webapp_local_production_password
+      - SQL_HOST=webapp_local_production_db
+      - SQL_PORT=5432
+
+  webapp_local_production_db:
+    image: postgres:13.0-alpine
+    volumes:
+      - webapp_local_production_postgres_data:/var/lib/postgresql/data/  
+    environment:
+      - POSTGRES_USER=webapp_local_production_user 
+      - POSTGRES_PASSWORD=webapp_local_production_password
+      - POSTGRES_DB=webapp_local_production_db   
+
+
+volumes:
+  webapp_local_production_postgres_data: 
+
